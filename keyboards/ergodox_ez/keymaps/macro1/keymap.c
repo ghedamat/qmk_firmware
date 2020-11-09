@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EQUAL,       KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_LEFT,                                        KC_RIGHT,       KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_MINUS,
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           TO(1),                                          KC_NO,          KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_BSLASH,
     KC_LCTRL,       KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_SCOLON,      LGUI_T(KC_QUOTE),
-    KC_LSHIFT,      KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,           KC_COLN,                                        KC_MEH,         KC_N,           KC_M,           KC_COMMA,       KC_DOT,         RCTL_T(KC_SLASH),KC_RSHIFT,
+    KC_LSHIFT,      KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,           KC_COLN,                                        KC_LEAD,         KC_N,           KC_M,           KC_COMMA,       KC_DOT,         RCTL_T(KC_SLASH),KC_RSHIFT,
     LT(1,KC_GRAVE), KC_QUOTE,       LALT(KC_LSHIFT),KC_LEFT,        KC_RIGHT,                                                                                                       KC_UP,          KC_DOWN,        KC_LBRACKET,    KC_RBRACKET,    KC_LEAD,
                                                                                                     KC_LEAD,          KC_LGUI,        KC_LALT,        LCTL_T(KC_ESCAPE),
                                                                                                                     KC_HOME,        KC_PGUP,
@@ -204,13 +204,12 @@ void matrix_scan_user(void) {
         SEQ_THREE_KEYS(KC_C, KC_C, KC_C) {
             SEND_STRING("Per key timing is great!!!");
         }
+        // PNDEV
+        SEQ_TWO_KEYS(KC_P, KC_X) { SEND_STRING("pndev start"); }
+        SEQ_TWO_KEYS(KC_P, KC_S) { SEND_STRING("pndev shell"); }
 
-        // Nix
-        SEQ_TWO_KEYS(KC_N, KC_B) { SEND_STRING("nix-build"); }
-        SEQ_THREE_KEYS(KC_N, KC_B, KC_D) { SEND_STRING("nix-build docker.nix"); }
-        SEQ_THREE_KEYS(KC_N, KC_O, KC_R) { SEND_STRING("nixos-rebuild switch"); }
-        SEQ_THREE_KEYS(KC_N, KC_O, KC_U) { SEND_STRING("nixos-rebuild switch --upgrade"); }
-        SEQ_THREE_KEYS(KC_N, KC_N, KC_P) { SEND_STRING("lorri init; niv init; niv update nixpkgs -b nixpkgs-unstable"); }
+        // tmux
+        SEQ_TWO_KEYS(KC_T, KC_S) { SEND_STRING("tmux attach-session"); }
 
         // Git
         SEQ_TWO_KEYS(KC_G, KC_P) { SEND_STRING("git push"); }
@@ -218,6 +217,7 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_U) { SEND_STRING("git pull"); }
         SEQ_TWO_KEYS(KC_G, KC_A) { SEND_STRING("git add -p"); }
         SEQ_TWO_KEYS(KC_G, KC_D) { SEND_STRING("git diff"); }
+        SEQ_TWO_KEYS(KC_G, KC_R) { SEND_STRING("git rebase -i"); }
         SEQ_THREE_KEYS(KC_G, KC_D, KC_S) { SEND_STRING("git diff --staged"); }
         SEQ_TWO_KEYS(KC_G, KC_L) { SEND_STRING("git log"); }
         SEQ_THREE_KEYS(KC_G, KC_L, KC_O) { SEND_STRING("git log --oneline"); }
@@ -230,8 +230,5 @@ void matrix_scan_user(void) {
         SEQ_THREE_KEYS(KC_P, KC_B, KC_M) {
             SEND_STRING("this sentence makes you breathe manually");
         }
-
-        // systemctl
     }
 }
-
